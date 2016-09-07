@@ -2,6 +2,7 @@
 网络接入层框架，支持Http与Socket,支持同步与异步，支持取消操作。
 
 NetExecutor: 网络层接口，提供如下方法
+
     RESPONSE sendRequest(REQUEST request) throws NetException;
 
     VOID sendRequest(REQUEST request, NetCallback<RESPONSE> listener);
@@ -12,6 +13,7 @@ NetExecutor: 网络层接口，提供如下方法
 
 
 Engine:网络引擎，真正做网络请求的，可以自定义网络引擎
+
     ENGINERESPONSE performRequest(EngineRequest<REQUEST> request) throws NetException;
 
     VOID cancelRequest(EngineRequest<REQUEST> request) throws NetException;
@@ -26,6 +28,7 @@ NetResponseParser：结果解析接口，网络引擎将网络响应的数据解
 
 
 HTTP：
+
     1.DefalutHttpExecutor
     网络层接口，提供同步或异步执行HttpRequest，也可以自己实现一个Http执行器。
 
