@@ -15,10 +15,10 @@ public class RealCall<REQUEST extends NetRequest,NETRESPONSE,ENGINERESPONSE exte
     /** The application's original request unadulterated by redirects or auth headers. */
     private final Dispatcher mDispatcher;
     private final EngineRequest<REQUEST> originalRequest;
-    private final Engine<REQUEST, ENGINERESPONSE> netEngine;
+    private final Engine<ENGINERESPONSE> netEngine;
     private final NetResponseParser<NETRESPONSE> parser;
 
-    public RealCall(Engine<REQUEST, ENGINERESPONSE> netEngine, NetResponseParser<NETRESPONSE> parser, Dispatcher dispatcher, EngineRequest<REQUEST> originalRequest) {
+    public RealCall(Engine<ENGINERESPONSE> netEngine, NetResponseParser<NETRESPONSE> parser, Dispatcher dispatcher, EngineRequest<REQUEST> originalRequest) {
         this.netEngine = netEngine;
         this.parser = parser;
         this.mDispatcher = dispatcher;
@@ -106,10 +106,9 @@ public class RealCall<REQUEST extends NetRequest,NETRESPONSE,ENGINERESPONSE exte
 
             // Parse the response here on the worker thread.
             NETRESPONSE response = parser.parseToNetResponse(networkResponse);
-            engineRequest.addMarker("network-parse-complete");
+            engineRequest.addMarker("network-parser-complete");
 
-            engineRequest.addMarker("print response [" + engineRequest.getSequence() + "]");
-            engineRequest.addMarker(response.toString());
+            engineRequest.addMarker("print response [" + engineRequest.getSequence() + "] " + response.toString());
             // If this request has canceled, finish it and don't deliver.
 
             if (engineRequest.isCanceled()) {

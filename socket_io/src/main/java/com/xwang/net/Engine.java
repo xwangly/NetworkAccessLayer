@@ -19,16 +19,16 @@ package com.xwang.net;
 /**
  * An interface for performing requests.
  */
-public interface Engine<REQUEST extends NetRequest, ENGINERESPONSE> {
+public interface Engine<ENGINERESPONSE> {
     /**
      * Performs the specified request.
      * @param request Request to process
      * @return A {@link ENGINERESPONSE} with data and caching metadata; will never be null
      * @throws NetException on errors
      */
-    ENGINERESPONSE performRequest(EngineRequest<REQUEST> request) throws NetException;
+    ENGINERESPONSE performRequest(EngineRequest request) throws NetException;
 
-    void cancelRequest(EngineRequest<REQUEST> request) throws NetException;
+    void cancelRequest(EngineRequest request) throws NetException;
 
     void shutDown();
 }

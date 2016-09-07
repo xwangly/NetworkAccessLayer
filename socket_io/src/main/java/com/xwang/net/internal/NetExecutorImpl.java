@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created by xwangly on 2016/8/31.
  */
 public abstract class NetExecutorImpl<REQUEST extends NetRequest, NETRESPONSE, ENGINERESPONSE extends EngineResponse> implements NetExecutor<REQUEST, NETRESPONSE> {
-    private Engine<REQUEST, ENGINERESPONSE> engine;
+    private Engine<ENGINERESPONSE> engine;
     private Executor callbackExecutor;
     private Dispatcher dispatcher;
     /**
@@ -21,17 +21,17 @@ public abstract class NetExecutorImpl<REQUEST extends NetRequest, NETRESPONSE, E
         this(null, callbackExecutor);
     }
 
-    public NetExecutorImpl(Engine<REQUEST, ENGINERESPONSE> engine, Executor callbackExecutor) {
+    public NetExecutorImpl(Engine<ENGINERESPONSE> engine, Executor callbackExecutor) {
         this.engine = engine;
         this.callbackExecutor = callbackExecutor;
         dispatcher = new Dispatcher();
     }
 
-    public void setEngine(Engine<REQUEST, ENGINERESPONSE> engine) {
+    public void setEngine(Engine<ENGINERESPONSE> engine) {
         this.engine = engine;
     }
 
-    public Engine<REQUEST, ENGINERESPONSE> getEngine() {
+    public Engine<ENGINERESPONSE> getEngine() {
         return engine;
     }
 

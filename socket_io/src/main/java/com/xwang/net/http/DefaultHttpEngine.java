@@ -8,9 +8,9 @@ import java.util.Map;
 /**
  * Created by xwangly on 2016/9/7.
  */
-public class DefaultHttpEngine extends HurlEngine<HttpRequest, HttpEngineResponse> {
+public class DefaultHttpEngine extends HurlEngine<HttpEngineResponse> {
     @Override
-    protected HttpEngineResponse createResponse(int responseCode, String responseMessage, byte[] datas, Map<String, String> header, long networkTimeMs, HttpURLConnection connection, EngineRequest<HttpRequest> request) {
+    protected HttpEngineResponse createResponse(int responseCode, String responseMessage, byte[] datas, Map<String, String> header, long networkTimeMs, HttpURLConnection connection, EngineRequest request) {
         return new HttpEngineResponse(responseCode, datas, header, networkTimeMs);
     }
 }

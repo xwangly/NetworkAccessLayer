@@ -33,7 +33,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * Delete volley code.
  * Abstract socket frame.
  */
-public class SocketStack<REQUEST extends NetRequest> implements Engine<REQUEST,SocketEngineResponse> {
+public class SocketStack implements Engine<SocketEngineResponse> {
     private String mHost;
     private int mPort;
     private Socket mSocket;
@@ -208,7 +208,7 @@ public class SocketStack<REQUEST extends NetRequest> implements Engine<REQUEST,S
      * 
      */
     @Override
-    public final SocketEngineResponse performRequest(EngineRequest<REQUEST> request)
+    public final SocketEngineResponse performRequest(EngineRequest request)
             throws NetException {
         long requestStart = System.currentTimeMillis();
         socketLock.lock();
@@ -256,7 +256,7 @@ public class SocketStack<REQUEST extends NetRequest> implements Engine<REQUEST,S
     }
 
     @Override
-    public void cancelRequest(EngineRequest<REQUEST> request) throws NetException {
+    public void cancelRequest(EngineRequest request) throws NetException {
         //Nothing to do while not support cancel.
         mResponseMap.interrutp(request.getSequence());
     }

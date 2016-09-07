@@ -17,13 +17,13 @@ public abstract class HttpExecutor<REQUEST extends NetRequest, RESPONSE extends 
     public HttpExecutor(Executor callbackExecutor) {
         super(callbackExecutor);
     }
-    public HttpExecutor(Executor callbackExecutor, Engine<REQUEST, ENGINE_RESPONSE> engine) {
+    public HttpExecutor(Executor callbackExecutor, Engine<ENGINE_RESPONSE> engine) {
         super(callbackExecutor);
         setEngine(engine);
     }
 
     @Override
-    public void setEngine(Engine<REQUEST, ENGINE_RESPONSE> engine) {
+    public void setEngine(Engine<ENGINE_RESPONSE> engine) {
         super.setEngine(engine);
     }
 

@@ -41,7 +41,7 @@ import javax.net.ssl.SSLSocketFactory;
 /**
  * An Engine based on {@link HttpURLConnection}.
  */
-public abstract class HurlEngine<REQUEST extends HttpRequest, RESPONSE extends HttpEngineResponse> implements Engine<REQUEST, RESPONSE> {
+public abstract class HurlEngine<RESPONSE extends HttpEngineResponse> implements Engine<RESPONSE> {
 
     private static final String HEADER_CONTENT_TYPE = "Content-Type";
 
@@ -80,9 +80,9 @@ public abstract class HurlEngine<REQUEST extends HttpRequest, RESPONSE extends H
     }
 
     @Override
-    public RESPONSE performRequest(EngineRequest<REQUEST> request) throws NetException {
+    public RESPONSE performRequest(EngineRequest request) throws NetException {
         long networkTimeMs = System.currentTimeMillis();
-        HttpRequest httpRequest = request.getRequest();
+        HttpRequest httpRequest = (HttpRequest) request.getRequest();
         String url = request.getURL();
         HashMap<String, String> map = new HashMap<String, String>();
         map.putAll(httpRequest.getHeaders());
@@ -128,7 +128,6 @@ public abstract class HurlEngine<REQUEST extends HttpRequest, RESPONSE extends H
             for (Entry<String, List<String>> header : connection.getHeaderFields().entrySet()) {
                 key = header.getKey();
                 value = header.getValue().get(0);
-                System.out.println(key+":" + value);
                 if (key != null) {
                     result.put(key, value);
                 }
@@ -151,10 +150,10 @@ public abstract class HurlEngine<REQUEST extends HttpRequest, RESPONSE extends H
         }
     }
 
-    protected abstract RESPONSE createResponse(int responseCode, String responseMessage, byte[] datas, Map<String, String> header, long networkTimeMs, HttpURLConnection connection, EngineRequest<REQUEST> request);
+    protected abstract RESPONSE createResponse(int responseCode, String responseMessage, byte[] datas, Map<String, String> header, long networkTimeMs, HttpURLConnection connection, EngineRequest request);
 
     @Override
-    public void cancelRequest(EngineRequest<REQUEST> request) throws NetException {
+    public void cancelRequest(EngineRequest request) throws NetException {
 
     }
 
