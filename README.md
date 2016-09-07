@@ -1,4 +1,3 @@
-#Created by xwangly on 2016/9/7.
 # NetworkAccessLayer
 网络接入层框架，支持Http与Socket,支持同步与异步，支持取消操作。
 
@@ -100,3 +99,4 @@ Socket:
     github:xwangly
 
     tencent:605134012
+#Created by xwangly on 2016/9/7.
