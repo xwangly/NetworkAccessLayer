@@ -31,8 +31,8 @@ public class NetException extends Exception {
     private static final String USER_CANCELED_TEXT        = "用户取消";
     private static final String NETWORK_EXCEPTION_TEXT    = "网络错误";
     private static final String SESSION_EXPIRED_TEXT      = "session过期";
-    private static final String SERVER_EXCEPTION_TEXT     = "服务器错误";
-    private static final String PARAMS_VALID_EXCEPTION_TEXT     = "参数非法";
+    private static final String SERVER_EXCEPTION_TEXT     =  "服务器错误";
+    private static final String PARAMS_VALID_EXCEPTION_TEXT  = "参数非法";
     private static final String NOTIFY_EXCEPTION_TEXT     = "回调错误";
 
     private int errorCode;

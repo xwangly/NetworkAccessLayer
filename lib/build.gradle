@@ -1,0 +1,141 @@
+/*
+ * Copyright (C) 2013 JFrog Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+//apply plugin: 'java'
+
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+
+// 这个version是区分library版本的，因此当我们需要更新library时记得修改这个version
+version = "1.0.0"
+
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+    defaultConfig {
+        minSdkVersion 11
+        targetSdkVersion 15
+        versionCode 1
+        versionName version
+    }
+    lintOptions {
+        abortOnError false
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions{
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+}
+
+
+def siteUrl = 'https://github.com/xwangly/NetworkAccessLayer'   // 项目的主页
+def gitUrl = 'https://github.com/xwangly/NetworkAccessLayer.git'   // Git仓库的url
+group = "com.xwang.net.networkaccesslayer" // Maven Group ID for the artifact，一般填你唯一的包名
+
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+//    publications = ['MyPublication']
+    configurations = ['archives']
+    pkg {
+        repo = 'maven'  //Repositories  maven仓库是默认建好的，不能删除，可以直接上传package到这个仓库中。
+        name = 'NetworkAccessLayer'  //Package
+//        userOrg = 'bintray_user' //可选项，如果作者属于一个组织，填写组织的名字；否则默认为‘BINTRAY_USER’  实测不能要这个字段
+        vcsUrl = gitUrl
+        desc = 'Network access layer containers abstract socket framework and Http framework.'
+        labels = ['network', 'http', 'socket']
+        publicDownloadNumbers = true
+        licenses = ['Apache-2.0']
+        publish = true
+        websiteUrl = siteUrl
+        //attributes= ['a': ['ay1', 'ay2'], 'b': ['bee'], c: 'cee'] //Optional package-level attributes
+        version {
+            name = '1.0-Final'
+            desc = 'Network access layer containers abstract socket framework and Http framework.'
+            vcsTag = '1.0.0'
+            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+        }
+    }
+}
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+
+                // Add your description here
+                name 'Network access layer'
+                description 'Network access layer framework'
+                url siteUrl
+
+                // Set your license
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'xwangly'        //填写bintray或者github的用户名
+                        name 'xwangly'         //姓名，可以是中文
+                        email 'xwangly@163.com'
+                    }
+                }
+
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}

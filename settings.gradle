@@ -1,1 +1,1 @@
-include ':app', ':socket_io'
+include ':app', ':lib'

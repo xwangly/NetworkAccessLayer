@@ -1,0 +1,61 @@
+apply plugin: 'java'
+
+bintray {
+    user = 'wx'
+    key = 'd6981e330c584d90cdd9f1876f38f5a038a32e0f'
+    publications = ['MyPublication']
+
+    pkg {
+        repo = 'generic'
+        name = 'com.xwang.net'
+        userOrg = 'bintray_user'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/xwangly/NetworkAccessLayer.git'
+        version {
+            name = '1.0-Final'
+            desc = 'Network access layer containers abstract socket frame and Http frame.'
+            released  = new Date()
+            vcsTag = '1.3.0'
+            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+        }
+    }
+}
+
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            from components.java
+            groupId 'com.xwang.net'
+            artifactId 'gradle-project'
+            version '1.1'
+        }
+    }
+}
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'NetworkAccessLayer'
+
+    publishedGroupId = 'com.xwang.net'
+    libraryName = 'NetworkAccessLayer'
+    artifact = 'networkaccesslayer'
+
+    libraryDescription = 'Network access layer containers abstract socket frame and Http frame.'
+
+    siteUrl = 'https://github.com/xwangly/NetworkAccessLayer'
+    gitUrl = 'https://github.com/xwangly/NetworkAccessLayer.git'
+
+    libraryVersion = '1.0.1'
+
+    developerId = 'wx'
+    developerName = 'xwangly'
+    developerEmail = 'xwangly@163.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
