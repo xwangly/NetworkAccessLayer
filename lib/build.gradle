@@ -20,9 +20,9 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-
+group = "com.xwang.net.networkaccesslayer" // Maven Group ID for the artifact，一般填你唯一的包名
 // 这个version是区分library版本的，因此当我们需要更新library时记得修改这个version
-version = "1.0.0"
+version = "1.0.1"
 
 
 android {
@@ -52,17 +52,19 @@ android {
 
 def siteUrl = 'https://github.com/xwangly/NetworkAccessLayer'   // 项目的主页
 def gitUrl = 'https://github.com/xwangly/NetworkAccessLayer.git'   // Git仓库的url
-group = "com.xwang.net.networkaccesslayer" // Maven Group ID for the artifact，一般填你唯一的包名
 
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 bintray {
-    user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
 //    publications = ['MyPublication']
     configurations = ['archives']
     pkg {
+        //lib url:  https://api.bintray.com/content/xwangly/maven/NetworkAccessLayer/1.1-Final/com/xwang/net/networkaccesslayer/lib/1.0.0/lib-1.0.0-javadoc.jar.
+        //lib url:  https://api.bintray.com/content/xwangly/maven/NetworkAccessLayer/1.0.1/com/xwang/net/networkaccesslayer/lib/1.0.1/lib-1.0.1-javadoc.jar...
+        //lib url = https://***/xwangly/repo/name/version/group/modulename/version/***
+        user = properties.getProperty("bintray.user")
         repo = 'maven'  //Repositories  maven仓库是默认建好的，不能删除，可以直接上传package到这个仓库中。
         name = 'NetworkAccessLayer'  //Package
 //        userOrg = 'bintray_user' //可选项，如果作者属于一个组织，填写组织的名字；否则默认为‘BINTRAY_USER’  实测不能要这个字段
@@ -74,12 +76,13 @@ bintray {
         publish = true
         websiteUrl = siteUrl
         //attributes= ['a': ['ay1', 'ay2'], 'b': ['bee'], c: 'cee'] //Optional package-level attributes
-        version {
-            name = '1.0-Final'
-            desc = 'Network access layer containers abstract socket framework and Http framework.'
-            vcsTag = '1.0.0'
-            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
-        }
+        //No need version clustor
+//        version {
+//            name = '1.1-Final'
+//            desc = 'Network access layer containers abstract socket framework and Http framework.'
+//            vcsTag = '1.1.0'
+//            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+//        }
     }
 }
 install {
