@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id=":SocketServer1" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="com.xwang.net" external.system.module.version="1.0.0" type="JAVA_MODULE" version="4">
+<module external.linked.project.id=":SocketServer" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="com.xwang.net" external.system.module.version="1.0.0" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
-        <option name="GRADLE_PROJECT_PATH" value=":SocketServer1" />
+        <option name="GRADLE_PROJECT_PATH" value=":SocketServer" />
       </configuration>
     </facet>
     <facet type="java-gradle" name="Java-Gradle">
@@ -28,5 +28,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="okio-1.10.0" level="project" />
+    <orderEntry type="library" exported="" name="SocketServer.SocketServer-1.0.0" level="project" />
+    <orderEntry type="library" exported="" name="SocketServer.SocketServer-1.0.0-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="SocketServer.SocketServer-1.0.0-sources" level="project" />
   </component>
 </module>
