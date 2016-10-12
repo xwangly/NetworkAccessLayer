@@ -14,40 +14,40 @@
  * limitations under the License.
  */
 
-//apply plugin: 'java'
+apply plugin: 'java'
 
-apply plugin: 'com.android.library'
+//apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-group = "com.xwang.net.networkaccesslayer" // Maven Group ID for the artifact，一般填你唯一的包名
+group = "com.xwang.net" // Maven Group ID for the artifact，一般填你唯一的包名
 // 这个version是区分library版本的，因此当我们需要更新library时记得修改这个version
-version = "1.0.1"
+version = "1.0.4"
 
 
-android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
-    defaultConfig {
-        minSdkVersion 11
-        targetSdkVersion 15
-        versionCode 1
-        versionName version
-    }
-    lintOptions {
-        abortOnError false
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions{
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
-    }
-}
+//android {
+//    compileSdkVersion 23
+//    buildToolsVersion "23.0.1"
+//    defaultConfig {
+//        minSdkVersion 11
+//        targetSdkVersion 15
+//        versionCode 1
+//        versionName version
+//    }
+//    lintOptions {
+//        abortOnError false
+//    }
+//    buildTypes {
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//        }
+//    }
+//    compileOptions{
+//        sourceCompatibility JavaVersion.VERSION_1_7
+//        targetCompatibility JavaVersion.VERSION_1_7
+//    }
+//}
 
 
 def siteUrl = 'https://github.com/xwangly/NetworkAccessLayer'   // 项目的主页
@@ -122,18 +122,23 @@ install {
         }
     }
 }
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
 
 task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
+    from 'src/main/java'
     classifier = 'sources'
 }
 
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+task javadocc(type: Javadoc) {
+//    source = android.sourceSets.main.java.srcDirs
+    source = 'src/main/java'
+    options.encoding = 'UTF-8'
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
+task javadocJar(type: Jar, dependsOn: javadocc) {
     classifier = 'javadoc'
     from javadoc.destinationDir
 }

@@ -1,6 +1,20 @@
 # NetworkAccessLayer
 网络接入层框架，支持Http与Socket,支持同步与异步，支持取消操作。
 
+Gradle引用方法
+在项目根目录中的gradle文件中加入：
+    allprojects {
+        repositories {
+            jcenter()
+            maven {
+                url  "http://dl.bintray.com/xwangly/maven/"
+            }
+        }
+    }
+在引用的Module中加入：
+    compile "com.xwang.net:NetworkAccess:1.0.4"
+
+
 NetExecutor: 网络层接口，提供如下方法
 
     RESPONSE sendRequest(REQUEST request) throws NetException;

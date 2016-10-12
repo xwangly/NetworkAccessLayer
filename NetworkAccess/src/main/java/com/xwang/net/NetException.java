@@ -21,19 +21,19 @@ public class NetException extends Exception {
     public static final int NOTIFY_EXCEPTION     = -1023;
 
 
-    private static final String UNKNOW_EXCEPTION_TEXT     = "Î´Öª´íÎó";
-    private static final String SOCKET_NOT_CONNECTED_TEXT = "ÍøÂçÃ»ÓĞÁ¬½Ó";
-    private static final String REQUEST_TIMEOUT_TEXT      = "ÇëÇó³¬Ê±";
-    private static final String NETWORK_DISCONNECT_TEXT   = "ÍøÂç¶Ï¿ª";
-    private static final String CONNECT_TIMEOUT_TEXT      = "Á¬½Ó³¬Ê±";
-    private static final String IO_EXCEPTION_TEXT         = "IO´íÎó";
-    private static final String PARSE_EXCEPTION_TEXT      = "½âÎöÊı¾İ´íÎó";
-    private static final String USER_CANCELED_TEXT        = "ÓÃ»§È¡Ïû";
-    private static final String NETWORK_EXCEPTION_TEXT    = "ÍøÂç´íÎó";
-    private static final String SESSION_EXPIRED_TEXT      = "session¹ıÆÚ";
-    private static final String SERVER_EXCEPTION_TEXT     =  "·şÎñÆ÷´íÎó";
-    private static final String PARAMS_VALID_EXCEPTION_TEXT  = "²ÎÊı·Ç·¨";
-    private static final String NOTIFY_EXCEPTION_TEXT     = "»Øµ÷´íÎó";
+    private static final String UNKNOW_EXCEPTION_TEXT     = "æœªçŸ¥é”™è¯¯";
+    private static final String SOCKET_NOT_CONNECTED_TEXT = "ç½‘ç»œæ²¡æœ‰è¿æ¥";
+    private static final String REQUEST_TIMEOUT_TEXT      = "è¯·æ±‚è¶…æ—¶";
+    private static final String NETWORK_DISCONNECT_TEXT   = "ç½‘ç»œæ–­å¼€";
+    private static final String CONNECT_TIMEOUT_TEXT      = "è¿æ¥è¶…æ—¶";
+    private static final String IO_EXCEPTION_TEXT         = "IOé”™è¯¯";
+    private static final String PARSE_EXCEPTION_TEXT      = "è§£ææ•°æ®é”™è¯¯";
+    private static final String USER_CANCELED_TEXT        = "ç”¨æˆ·å–æ¶ˆ";
+    private static final String NETWORK_EXCEPTION_TEXT    = "ç½‘ç»œé”™è¯¯";
+    private static final String SESSION_EXPIRED_TEXT      = "sessionè¿‡æœŸ";
+    private static final String SERVER_EXCEPTION_TEXT     =  "æœåŠ¡å™¨é”™è¯¯";
+    private static final String PARAMS_VALID_EXCEPTION_TEXT  = "å‚æ•°éæ³•";
+    private static final String NOTIFY_EXCEPTION_TEXT     = "å›è°ƒé”™è¯¯";
 
     private int errorCode;
 
