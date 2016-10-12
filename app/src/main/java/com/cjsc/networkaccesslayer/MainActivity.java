@@ -23,6 +23,7 @@ import com.xwang.net.http.DefaultHttpEngine;
 import com.xwang.net.http.HttpExecutor;
 import com.xwang.net.http.HttpRequest;
 import com.xwang.net.http.StringRequest;
+import com.xwang.net.socket.SocketStack;
 
 import org.json.JSONObject;
 
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         sv.addView(layout);
 
         setContentView(sv);
+
     }
 
     public void cancel() {
