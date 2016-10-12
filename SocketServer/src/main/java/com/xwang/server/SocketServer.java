@@ -6,6 +6,7 @@ import java.net.StandardSocketOptions;
 import java.nio.channels.AsynchronousChannelGroup;
 import java.nio.channels.AsynchronousServerSocketChannel;
 import java.nio.channels.AsynchronousSocketChannel;
+import java.nio.channels.CompletionHandler;
 import java.util.Comparator;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
@@ -15,10 +16,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import okio.Buffer;
 
+import static com.xwang.server.Logger.log;
+import static com.xwang.server.Logger.loge;
+
 /**
  * Created by xwangly on 2016/9/28.
  */
-public class SocketServer<T> {
+public class SocketServer<T> implements CompletionHandler<AsynchronousSocketChannel, Integer>  {
     private final int port;
     private final long timeout;
     private final RequestParser<T> requestParser;
@@ -69,15 +73,40 @@ public class SocketServer<T> {
         serverSocketChannel.bind(new InetSocketAddress(port));
         readCompletionHandler = new ReadCompletionHandler(this);
 
-        AcceptCompletionHandler acceptCompletionHandler = new AcceptCompletionHandler(serverSocketChannel, this);
-        acceptCompletionHandler.accept(0);
+        accept(0);
     }
 
-    public Readable createReadable(int index, AsynchronousSocketChannel socketChannel) {
+    @Override
+    public void completed(AsynchronousSocketChannel result, Integer index) {
+        try {
+            log("New connection:"+index + " url:" + result.getRemoteAddress());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Readable readable =createReadable(index, result);
+        addReadable(readable);
+
+        readable.read();
+        accept(index + 1);
+    }
+
+    @Override
+    public void failed(Throwable exc, Integer attachment) {
+        loge("Accept failed " + attachment);
+        if (serverSocketChannel != null && serverSocketChannel.isOpen()) {
+            accept(attachment + 1);
+        }
+    }
+
+    private void accept(int index) {
+        serverSocketChannel.accept(index, this);
+    }
+
+    private Readable createReadable(int index, AsynchronousSocketChannel socketChannel) {
         ClientSession session = new ClientSession(index, this, socketChannel, readCompletionHandler);
         return session;
     }
-    public void addReadable(Readable readable) {
+    private void addReadable(Readable readable) {
         queue.add(readable);
     }
     public void updateReadable(Readable readable) {

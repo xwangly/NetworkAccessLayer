@@ -22,16 +22,18 @@ public class ClientSession implements Readable, Writeable, CompletionHandler<Int
     final int index;
     final SocketServer socketServer;
     private final AsynchronousSocketChannel socketChannel;
-    private final int READ_BUFFER_SIZE = 30;
+    private final int READ_BUFFER_SIZE = 1024;
     private final ByteBuffer readByteBuffer = ByteBuffer.allocate(READ_BUFFER_SIZE);
+    private final byte[] readByteArray = new byte[READ_BUFFER_SIZE];
     private final Buffer readBuffer = new Buffer();
     private final byte[] header;
     private final int HEADER_LEN;
 
     private ReentrantLock writeLock = new ReentrantLock();
     //Write params need lock.
-    private final int WRITE_BUFFER_SIZE = 10;
+    private final int WRITE_BUFFER_SIZE = 1024;
     private final ByteBuffer writeByteBuffer = ByteBuffer.allocate(WRITE_BUFFER_SIZE);
+    private final byte[] writeByteArray = new byte[WRITE_BUFFER_SIZE];
     private Queue<Buffer> writeQueue = new LinkedList<>();
     private boolean isWrite = false;
 
@@ -59,9 +61,9 @@ public class ClientSession implements Readable, Writeable, CompletionHandler<Int
         //Because read operation is sequence.
         readByteBuffer.flip();
         //Copy read bytes to buffer.
-        while (readByteBuffer.hasRemaining()) {
-            readBuffer.writeByte(readByteBuffer.get());
-        }
+        int readBytes = readByteBuffer.remaining();
+        readByteBuffer.get(readByteArray, 0, readBytes);
+        readBuffer.write(readByteArray, 0, readBytes);
         readByteBuffer.clear();
 
         long read_buffer_size;
@@ -122,11 +124,13 @@ public class ClientSession implements Readable, Writeable, CompletionHandler<Int
     private void writeBuffer(Buffer buffer) {
         writeByteBuffer.clear();
         log("Write buffer remain size :" + buffer.size() + " client:" + this);
-        while (buffer.size() > 0 && writeByteBuffer.hasRemaining()) {
-            writeByteBuffer.put(buffer.readByte());
+
+        int SIZE = buffer.read(writeByteArray, 0 , WRITE_BUFFER_SIZE);
+        if (SIZE > 0) {
+            writeByteBuffer.put(writeByteArray, 0 ,SIZE);
+            writeByteBuffer.flip();
+            socketChannel.write(writeByteBuffer, buffer, this);
         }
-        writeByteBuffer.flip();
-        socketChannel.write(writeByteBuffer, buffer, this);
     }
     @Override
     public long getTimeMillis() {
@@ -145,7 +149,7 @@ public class ClientSession implements Readable, Writeable, CompletionHandler<Int
 
     @Override
     public void completed(Integer result, Buffer attachment) {
-        log("Write complete success "+result + " remain:" + attachment.size() +" bytes client:" + this);
+        log("Write complete success "+result + " remain:" + attachment.size() + " bytes client:" + this);
         updateTimeMillis();
         if (attachment.size() > 0) {
             writeBuffer(attachment);
