@@ -2,18 +2,18 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/NetworkAccess/src/main/java/com/xwang/net/NetException.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SocketServer/src/main/java/com/xwang/server/AcceptCompletionHandler.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/SocketServer/src/main/java/com/xwang/server/ClientSession.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/SocketServer/src/main/java/com/xwang/server/Dispatcher.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/SocketServer/src/main/java/com/xwang/server/Logger.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/SocketServer/src/main/java/com/xwang/server/ReadCompletionHandler.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/SocketServer/src/main/java/com/xwang/server/Readable.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/SocketServer/src/main/java/com/xwang/server/RequestParser.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/SocketServer/src/main/java/com/xwang/server/SocketServer.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/SocketServer/src/main/java/com/xwang/server/TimeoutAble.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/SocketServer/src/main/java/com/xwang/server/TimeoutWatchDog.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/SocketServer/src/main/java/com/xwang/server/WriteCompletionHandler.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/SocketServer/src/main/java/com/xwang/server/Writeable.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/SocketServer1/src/main/java/com/xwang/server/AcceptCompletionHandler.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/SocketServer1/src/main/java/com/xwang/server/ClientSession.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SocketServer1/src/main/java/com/xwang/server/Dispatcher.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/SocketServer1/src/main/java/com/xwang/server/Logger.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/SocketServer1/src/main/java/com/xwang/server/ReadCompletionHandler.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/SocketServer1/src/main/java/com/xwang/server/Readable.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/SocketServer1/src/main/java/com/xwang/server/RequestParser.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/SocketServer1/src/main/java/com/xwang/server/SocketServer.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/SocketServer1/src/main/java/com/xwang/server/TimeoutAble.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/SocketServer1/src/main/java/com/xwang/server/TimeoutWatchDog.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/SocketServer1/src/main/java/com/xwang/server/WriteCompletionHandler.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/SocketServer1/src/main/java/com/xwang/server/Writeable.java" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

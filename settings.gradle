@@ -1,1 +1,1 @@
-include ':NetworkAccess', ':app', ':SocketServer'
+include ':NetworkAccess', ':app', ':SocketServer1'
