@@ -3,16 +3,27 @@
 
 Gradle引用方法
 在项目根目录中的gradle文件中加入：
+
     allprojects {
+
         repositories {
+
             jcenter()
+
             maven {
+
                 url  "http://dl.bintray.com/xwangly/maven/"
+
             }
+
         }
+
     }
+
 在引用的Module中加入：
+
     compile "com.xwang.net:NetworkAccess:1.0.4"
+
 
 
 NetExecutor: 网络层接口，提供如下方法
